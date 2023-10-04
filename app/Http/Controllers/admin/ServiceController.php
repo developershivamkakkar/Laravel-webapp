@@ -210,9 +210,36 @@ class ServiceController extends Controller
     }
 
 
-    public function delete()
+    public function delete($id, Request $request)
     {
+           $service=Service::where('id', $id)->first();
 
-        echo "delete a Service";
+           if(empty($service))
+           {
+               session()->flash('error','Record not found');
+               
+               
+               return response([
+              'status'=>0,
+
+               ]);
+           }
+
+           $path='./uploads/services/thumb/small/'.$service->image;
+           file::delete($path);
+
+           $path='./uploads/services/thumb/large/'.$service->image;
+           file::delete($path);
+
+           Service::where('id',$id)->delete();
+
+           session()->flash('success','Service deleted Successfully');
+               
+               
+               return response([
+              'status'=>1,
+
+               ]);
+
     }
 }

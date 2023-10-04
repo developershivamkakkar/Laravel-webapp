@@ -26,12 +26,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/',[HomeController::class, 'index']);
-Route::get('/about',[HomeController::class, 'about']);
-Route::get('/services',[ServicesController::class, 'index']);
-Route::get('/faq',[FaqController::class,'index']);
-Route::get('/blogs',[BlogController::class,'index']);
-Route::get('/contact',[ContactController::class,'index']);
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [HomeController::class, 'about']);
+Route::get('/services', [ServicesController::class, 'index']);
+Route::get('/services/detail/{id}', [ServicesController::class, 'detail']);
+
+
+Route::get('/faq', [FaqController::class, 'index']);
+Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/contact', [ContactController::class, 'index']);
 
 
 
@@ -49,21 +52,19 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin.auth'], function () {
 
         // Here We will define  Password Protected  Routes
-        Route::get('/dashboard' ,[DashboardController::class, 'index'])-> name('admin.dashboard');
-        Route::get('/logout' ,[AdminLoginController::class, 'logout'])-> name('admin.logout');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
-        Route::get('/services/create',[ServiceController::class, 'create'])->name('service.create.form');
-        Route::post('/services/create',[ServiceController::class, 'save'])->name('service.create');
-        Route::get('/services',[ServiceController::class, 'index'])->name('servicelist');
-        Route::get('/services/edit/{id}',[ServiceController::class, 'edit'])->name('service.edit');
-        Route::post('/services/edit/{id}',[ServiceController::class, 'update'])->name('service.edit.update');
-
-
-
-        Route::post('/temp/upload',[TempImageController::class, 'upload'])->name('tempUpload');
+        Route::get('/services/create', [ServiceController::class, 'create'])->name('service.create.form');
+        Route::post('/services/create', [ServiceController::class, 'save'])->name('service.create');
+        Route::get('/services', [ServiceController::class, 'index'])->name('servicelist');
+        Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
+        Route::post('/services/edit/{id}', [ServiceController::class, 'update'])->name('service.edit.update');
+        Route::post('/services/delete/{id}', [ServiceController::class, 'delete'])->name('service.delete');
 
 
 
 
+        Route::post('/temp/upload', [TempImageController::class, 'upload'])->name('tempUpload');
     });
 });

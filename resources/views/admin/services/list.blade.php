@@ -96,18 +96,20 @@
                                                 @if ($service->status == 1)
                                                     <span class="badge bg-success"> Active </span>
                                                 @else
-                                                    <span class="badge bg-success"> Block </span>
+                                                    <span class="badge bg-danger"> Block </span>
                                                 @endif
 
                                             </td>
 
                                             <td>
 
-                                                <a href="{{ route('service.edit', $service->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('service.edit', $service->id) }}"
+                                                    class="btn btn-primary">
                                                     Edit</a>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-danger"> Delete </a>
+                                                <a href="javascript:void(0);" class="btn btn-danger"
+                                                    onclick="deleteService({{ $service->id }});"> Delete </a>
 
                                             </td>
                                         </tr>
@@ -146,4 +148,26 @@
     <!-- /.content -->
 
 
+@endsection
+
+@section('extraJs')
+    <script type="text/javascript">
+        function deleteService(id) {
+            if (confirm("Are you sure you want to delete? ")) {
+
+                $.ajax({
+
+                    url: '{{ url("admin/services/delete") }}/'+id,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {},
+                    success: function(response) {
+                      window.location.href="{{route('servicelist')  }}";
+
+                    }
+                });
+
+            }
+        }
+    </script>
 @endsection
