@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminBlogController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ServiceController;
@@ -61,6 +62,19 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
         Route::post('/services/edit/{id}', [ServiceController::class, 'update'])->name('service.edit.update');
         Route::post('/services/delete/{id}', [ServiceController::class, 'delete'])->name('service.delete');
+
+
+        //Blog Routes 
+        Route::get('/blog/create', [AdminBlogController::class, 'create'])->name('blog.create.form');
+        Route::post('/blog/create', [AdminBlogController::class, 'save'])->name('blog.save');
+        Route::get('/blogs', [AdminBlogController::class, 'index'])->name('bloglist');
+        Route::get('/blogs/edit/{id}', [AdminBlogController::class, 'edit'])->name('blog.edit');
+        Route::post('/blogs/edit/{id}', [AdminBlogController::class, 'update'])->name('blog.update');
+        Route::post('/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
+
+
+
+
 
 
 
