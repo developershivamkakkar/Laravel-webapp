@@ -18,7 +18,7 @@ border-image:none;
 max-width:500px;
 margin-left:auto;
 margin-right:auto;
-
+}
 
 .error
 {
@@ -26,6 +26,9 @@ color: red;
 
 }
 
-
+.ui-state-default{
+    padding:10px 15px;
+    margin-bottom: 5px;
 }
+
 

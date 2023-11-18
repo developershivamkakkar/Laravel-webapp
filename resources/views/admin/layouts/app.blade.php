@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('admin_assets/assets/css/adminlte.min.css?v=3.2.0') }}">
     <link rel="stylesheet" href="{{ asset('admin_assets/assets/plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin_assets/assets/plugins/dropzone/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/assets/plugins/jquery-ui/jquery-ui.min.css') }}">
+
 
     <link rel="stylesheet" href="{{ asset('admin_assets/assets/css/custom.css') }}">
 </head>
@@ -61,19 +63,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('bloglist')  }}" class="nav-link">
+                            <a href="{{ route('bloglist') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Blogs</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('faqlist') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Faq</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('pagelist') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Pages</p>
                             </a>
@@ -103,7 +105,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023 </strong> Made with Love by Shivam Kakkar
+            <strong>Copyright &copy; 2023 </strong> Made with Love by developershivam.com
         </footer>
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -126,6 +128,7 @@
     <script src="{{ asset('admin_assets/assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- dropzone js  -->
     <script src="{{ asset('admin_assets/assets/plugins/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('admin_assets/assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
 
 

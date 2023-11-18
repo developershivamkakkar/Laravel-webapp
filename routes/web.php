@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminBlogController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\BlogController;
@@ -10,6 +11,10 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\admin\PageController;
+use App\Http\Controllers\admin\SettingsController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,13 +33,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/about', [HomeController::class, 'about']);
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
+
+
 Route::get('/services', [ServicesController::class, 'index']);
 Route::get('/services/detail/{id}', [ServicesController::class, 'detail']);
-
-
 Route::get('/faq', [FaqController::class, 'index']);
-Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/blogs', [BlogController::class, 'index'])->name('blog.front');
+Route::get('/blog/{id}', [BlogController::class, 'detail'])->name('blog.detail');
 Route::get('/contact', [ContactController::class, 'index']);
 
 
@@ -72,6 +80,28 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/blogs/edit/{id}', [AdminBlogController::class, 'update'])->name('blog.update');
         Route::post('/blogs/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
 
+        //FAQ Routes 
+       
+        Route::get('/faq', [AdminFaqController::class, 'index'])->name('faqlist');  
+        Route::get('/faq/create', [AdminFaqController::class, 'create'])->name('faq.create');
+        Route::post('/faq/save', [AdminFaqController::class, 'save'])->name('faq.save');
+        Route::get('/faq/edit/{id}', [AdminFaqController::class, 'edit'])->name('faq.edit');
+        Route::post('/faq/edit/{id}', [AdminFaqController::class, 'update'])->name('faq.update');
+        Route::post('/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('faq.delete');
+
+        //Page Routes 
+        Route::get('/page/create',[PageController::class,'create'])->name('page.create.form');
+        Route::post('/page/create',[PageController::class,'save'])->name('page.save');
+        Route::get('/pages', [PageController::class, 'index'])->name('pagelist');  
+        Route::get('/page/edit/{id}', [PageController::class, 'edit'])->name('page.edit');
+        Route::post('/page/edit/{id}', [PageController::class, 'update'])->name('page.update');
+        Route::post('/page/delete/{id}', [PageController::class, 'delete'])->name('page.delete');
+        Route::post('/page/deleteImage}', [PageController::class, 'deleteImage'])->name('page.deleteImage');
+
+       // Settings Route 
+             
+       Route::get('/settings',[SettingsController::class,'index'])->name('settings.index');
+       Route::post('/settings',[SettingsController::class,'save'])->name('settings.save');
 
 
 
@@ -79,6 +109,13 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
+
+
+
+
+
+
+         
         Route::post('/temp/upload', [TempImageController::class, 'upload'])->name('tempUpload');
     });
 });

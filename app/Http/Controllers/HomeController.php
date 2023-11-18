@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\Page;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,24 @@ class HomeController extends Controller
 
     public function about()
     {
-
-        return view('about');
+        $page= Page::where('id',33)->first();
+        return view('static-page',['page'=>$page]);
     }
+
+    public function privacy(){
+        $page= Page::where('id',37)->first();
+        return view('static-page',['page'=>$page]);
+
+    }
+
+    public function terms(){
+        $page= Page::where('id',34)->first();
+        return view('static-page',['page'=>$page]);
+
+    }
+
 }
+
+
+
+

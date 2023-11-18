@@ -22,13 +22,15 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo mb-4">
-                {{-- <a href="#"><img src="../images/logo.png"></a> --}}
+                 <a href="#"><img src="{{ asset('uploads/logo.png') }}" width=300px; height=100px;></a> 
+              
             </div>
 
 
 
             <div class="card">
                 <div class="card-body login-card-body">
+                    
                     <p class="login-box-msg">Sign in to start your session</p>
                     <form action="{{ route('admin.auth') }}" method="post">
                         @csrf
